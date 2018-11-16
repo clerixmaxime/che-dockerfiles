@@ -1,0 +1,79 @@
+{
+    "defaultEnv": "default",
+    "environments": {
+      "default": {
+        "machines": {
+          "nodejs": {
+            "attributes": {
+              "memoryLimitBytes": "2147483648"
+            },
+            "servers": {
+              "3000": {
+                "attributes": {},
+                "port": "3000",
+                "protocol": "http"
+              },
+              "8080": {
+                "attributes": {},
+                "port": "8080",
+                "protocol": "http"
+              },
+              "9000": {
+                "attributes": {},
+                "port": "9000",
+                "protocol": "http"
+              },
+              "angular": {
+                "attributes": {},
+                "port": "8003",
+                "protocol": "http"
+              }
+            },
+            "volumes": {},
+            "installers": [
+              "org.eclipse.che.exec",
+              "org.eclipse.che.terminal",
+              "org.eclipse.che.ws-agent"
+            ],
+            "env": {}
+          }
+        },
+        "recipe": {
+          "type": "dockerimage",
+          "content": "quay.io/mclerix/che-nodejs-openshift",
+          "contentType": ""
+        }
+      }
+    },
+    "projects": [
+      {
+        "links": [],
+        "name": "nodejs-for-gitlabci",
+        "attributes": {
+          "commands": [
+            "{\"commandLine\":\"cd nodejs-for-gitlabci\\nnpm install\", \"name\":\"install\", \"attributes\":{\"goal\":\"Build\", \"previewUrl\":\"\"}, \"type\":\"custom\"}",
+            "{\"commandLine\":\"cd nodejs-for-gitlabci\\nnpm run test\\nnpm run lint\\nnpm run security-check\\nnpm run coverage\", \"name\":\"fullTest\", \"attributes\":{\"goal\":\"Test\", \"previewUrl\":\"\"}, \"type\":\"custom\"}",
+            "{\"commandLine\":\"cd nodejs-for-gitlabci\\nnpm run coverage\", \"name\":\"coverage\", \"attributes\":{\"goal\":\"Test\", \"previewUrl\":\"\"}, \"type\":\"custom\"}",
+            "{\"commandLine\":\"cd nodejs-for-gitlabci\\nnpm run lint\", \"name\":\"lint\", \"attributes\":{\"goal\":\"Test\", \"previewUrl\":\"\"}, \"type\":\"custom\"}",
+            "{\"commandLine\":\"cd nodejs-for-gitlabci\\nnpm run test\", \"name\":\"test\", \"attributes\":{\"goal\":\"Test\", \"previewUrl\":\"\"}, \"type\":\"custom\"}",
+            "{\"commandLine\":\"cd nodejs-for-gitlabci\\nnpm run security-check\", \"name\":\"security\", \"attributes\":{\"goal\":\"Test\", \"previewUrl\":\"\"}, \"type\":\"custom\"}",
+            "{\"commandLine\":\"cd nodejs-for-gitlabci\\nnpm start\", \"name\":\"run\", \"attributes\":{\"goal\":\"Run\", \"previewUrl\":\"${server.8080}\"}, \"type\":\"custom\"}"
+          ]
+        },
+        "type": "blank",
+        "source": {
+          "location": "http://gitlab.mc-apps.openhybridcloud.io/mclerix/nodejs-for-gitlabci.git",
+          "type": "git",
+          "parameters": {}
+        },
+        "path": "/nodejs-for-gitlabci",
+        "description": "",
+        "mixins": [],
+        "problems": []
+      }
+    ],
+    "name": "nodejs",
+    "attributes": {},
+    "commands": [],
+    "links": []
+  }
